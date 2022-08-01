@@ -1,0 +1,89 @@
+﻿@page
+@model CRUD.Pages.EditModel
+@{
+}
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+<div>
+    <h4>
+        Edit Data Kendaraan
+    </h4>
+    @if (@Model.errMsg.Length > 0)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          @Model.errMsg
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (@Model.sccsMsg.Length > 0)
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          @Model.sccsMsg
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <form method="POST">
+
+    <div class="row">
+        <div class="col-4">
+           <input type="text" class="form-control" name="id" value="@Model.listKendaraan.nomorRegistrasi" hidden >
+          <label for="noRegistrasiKendaraan" class="form-label">No. Registrasi Kendaraan</label>
+          <input type="text" class="form-control" name="noRegistrasiKendaraan" value="@Model.listKendaraan.nomorRegistrasi" disabled >
+        </div>
+        <div class="col-4">
+          <label for="tahun" class="form-label">Tahun</label>
+          <input type="number" class="form-control" name="tahun" value="@Model.listKendaraan.tahun">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+          <label for="namaPemilik" class="form-label">Nama Pemilik</label>
+          <input type="text" class="form-control" name="namaPemilik" value="@Model.listKendaraan.namaPemilik" >
+        </div>
+        <div class="col-4">
+          <label for="kapasitas" class="form-label">Kapasitas Silinder</label>
+          <input type="text" class="form-control" name="kapasitas" value="@Model.listKendaraan.kapasitas">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+          <label for="merk" class="form-label">Merk Kendaraan</label>
+          <input type="text" class="form-control" name="merk" value="@Model.listKendaraan.merkKendaraan">
+        </div>
+        <div class="col-4">
+          <label for="warna" class="form-label">Warna Kendaraan</label>
+          <select class="form-select" name="warna" id="warna" aria-label="Floating label select example">
+            <option value="">Pilih Warna</option>
+            <option value="Merah">Merah</option>
+            <option value="Hitam">Hitam</option>
+            <option value="Biru">Biru</option>
+            <option value="Abu-Abu">Abu-Abu</option>
+          </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+          <label for="alamat" class="form-label">Alamat Pemilik Kendaraan</label>
+          <textarea class="form-control" name="alamat" rows="3" >@Model.listKendaraan.alamat</textarea>
+        </div>
+        <div class="col-4">
+          <label for="bahanBakar" class="form-label">Bahan Bakar</label>
+          <input type="text" class="form-control" name="bahanBakar" value="@Model.listKendaraan.bahanBakar" >
+        </div>
+    </div>
+
+    <div class="row col-8" style="margin-top: 20px">
+        <button class="btn btn-primary" type="submit" style="width:50%">Update</button>
+        <a class="btn btn-secondary" href="/" role="button" style="width:50%">Kembali</a>
+    </div>
+</form>
+</div>
+
+<script>
+     $(document).ready(function () {
+         $('.judul').empty();
+         $("#warna option[value=@Model.listKendaraan.warna]").attr('selected', 'selected');
+     });
+ </script>

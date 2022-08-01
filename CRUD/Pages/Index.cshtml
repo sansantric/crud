@@ -1,0 +1,88 @@
+﻿@page
+@model IndexModel
+@{
+    String id = "";
+}
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+<style>
+   .actionn {
+    text-decoration: none;
+    margin:2px;
+   }
+</style>
+
+<div class="text-center">
+
+    <div class="formSearch">
+        <div style="background-color:#ffe4d4; padding:15px">
+            <div class="form-floating col-4 mb-3">
+              <input type="text" class="form-control" id="floatingInput" placeholder="No Registrasi" style="height: 25px">
+              <label for="floatingInput" style="padding: 5px">No Registrasi</label>
+            </div>
+            <div class="form-floating col-4">
+              <input type="text" class="form-control" id="floatingPassword" placeholder="Nama Pemilik" style="height: 25px">
+              <label for="floatingPassword" style="padding: 5px">Nama Pemilik</label>
+            </div>
+        </div>
+        <div style="text-align:end; padding:5px">
+            <a class="btn btn-primary" href="#" role="button" style="margin-right:2px">Search</a>
+            <a class="btn btn-primary" href="/Create" role="button" >Add</a>
+        </div>
+
+    </div>
+
+
+    <div>
+        <table class="table table-bordered table-hover">
+          <thead style="background-color: #7fc0f5">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">No Registrasi</th>
+              <th scope="col">Nama Pemilik</th>
+              <th scope="col">Merk Kendaraan</th>
+              <th scope="col">Tahun Pembuatan</th>
+              <th scope="col">Kapasitas</th>
+              <th scope="col">Warna</th>
+              <th scope="col">Bahan Bakar</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach (var item in Model.ListKendaraan)
+              {
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-body">
+                            <p>Anda yakin ingin menghapus data @item.nomorRegistrasi ?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <a class="btn btn-primary" href="/Delete?id=@item.nomorRegistrasi" role="button" >OK</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.nomorRegistrasi</td>
+                    <td>@item.namaPemilik</td>
+                    <td>@item.merkKendaraan</td>
+                    <td>@item.tahun</td>
+                    <td>@item.kapasitas</td>
+                    <td>@item.warna</td>
+                    <td>@item.bahanBakar</td>
+                    <td>
+                        <a class="actionn" href="/Detail?id=@item.nomorRegistrasi" style="color:#a8785b">Detail</a>
+                        <a class="actionn" href="/Edit?id=@item.nomorRegistrasi">Edit</a>
+                        <a class="actionn" href="/Create" role="button" style="color:red" data-bs-toggle="modal" data-bs-target="#exampleModal" >Delete</a>
+                    </td>
+                </tr>
+              }
+          </tbody>
+        </table>
+    </div>
+</div>

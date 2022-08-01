@@ -1,0 +1,26 @@
+﻿@page
+@using System.Data.SqlClient;
+@model CRUD.Pages.DeleteModel
+@{
+    try
+    {
+        String id = Request.Query["id"];
+        String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=CRUD;Persist Security Info=True;User ID=Admin;Password=admin";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = String.Format("DELETE FROM tb_kendaraan WHERE Nomor_Registrasi_Kendaraan='{0}'",id);
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+        return;
+    }
+    catch (Exception ex)
+    {
+        return;
+    }
+
+    Response.Redirect("/Index");
+}
